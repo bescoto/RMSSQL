@@ -59,6 +59,15 @@ setMethod("dbSendQuery", signature(conn="SQLServerConnection", statement="charac
   new("SQLServerResult", jr=r, md=md, stat=s, pull=.jnull())
 })
 
+setMethod("dbExistsTable", "SQLServerConnection", def=function(conn, name, ...) {
+  s <- .jcall(conn@jc, "Ljava/sql/Statement;", "createStatement")
+  .verify.JDBC.result(s, "Unable to create simple JDBC statement ",statement)
+  r <- .jcall(s, "Ljava/sql/ResultSet;", "executeQuery", paste0("SELECT TOP 0 * FROM ", name), check=FALSE)
+  .verify.JDBC.result(r, "Unable to retrieve JDBC result set for ",statement)
+  
+  TRUE
+})
+
 ##=== SQLServerResult
 ## jr - result set, md - metadata, stat - statement
 ## Since the life of a result set depends on the life of the statement, we have to explicitly

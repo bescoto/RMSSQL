@@ -2,7 +2,8 @@ exportPattern("^[[:alpha:]]+")
 exportMethods(
     "dbConnect",
     "dbHasCompleted",
-    "dbSendQuery" 
+    "dbSendQuery",
+    "dbExistsTable"
 )
 exportClasses(
     "SQLServerConnection",
