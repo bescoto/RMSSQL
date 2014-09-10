@@ -1,15 +1,18 @@
-##=== Add sqljdbc4.jar to classpath
+#' @import RJDBC
+#' @import DBI
 
 ##=== SQLServerDriver
 
+#' @export
 setClass("SQLServerDriver", contains = "JDBCDriver")
 
+#' @export
 SQLServer <- function(identifier.quote=NA) {
-  require(RJDBC)
   drv <- JDBC("com.microsoft.sqlserver.jdbc.SQLServerDriver", system.file("java", "sqljdbc4.jar", package="RSQLServer"))
   new("SQLServerDriver", identifier.quote=as.character(identifier.quote), jdrv= drv@jdrv)
 }
 
+#' @export
 setMethod("dbConnect", "SQLServerDriver", def=function(drv, url, user='', password='', ...) {
   jc <- .jcall("java/sql/DriverManager","Ljava/sql/Connection;","getConnection", as.character(url)[1], as.character(user)[1], as.character(password)[1], check=FALSE)
   if (is.jnull(jc) && !is.jnull(drv@jdrv)) {
@@ -29,8 +32,10 @@ setMethod("dbConnect", "SQLServerDriver", def=function(drv, url, user='', passwo
 
 ### SQLServerConnection
 
+#' @export
 setClass("SQLServerConnection", representation("JDBCConnection", jc="jobjRef", identifier.quote="character"))
 
+#' @export
 setMethod("dbSendQuery", signature(conn="SQLServerConnection", statement="character"),  def=function(conn, statement, ..., list=NULL) {
   statement <- as.character(statement)[1L]
   ## if the statement starts with {call or {?= call then we use CallableStatement 
@@ -59,6 +64,7 @@ setMethod("dbSendQuery", signature(conn="SQLServerConnection", statement="charac
   new("SQLServerResult", jr=r, md=md, stat=s, pull=.jnull())
 })
 
+#' @export
 setMethod("dbExistsTable", "SQLServerConnection", def=function(conn, name, ...) {
   s <- .jcall(conn@jc, "Ljava/sql/Statement;", "createStatement")
   .verify.JDBC.result(s, "Unable to create simple JDBC statement ",statement)
@@ -73,12 +79,15 @@ setMethod("dbExistsTable", "SQLServerConnection", def=function(conn, name, ...) 
 ## Since the life of a result set depends on the life of the statement, we have to explicitly
 ## save the later as well (and close both at the end)
 
+#' @export
 setClass("SQLServerResult", representation("JDBCResult", jr="jobjRef", md="jobjRef", stat="jobjRef", pull="jobjRef"))
 
+#' @export
 setMethod("dbHasCompleted", "SQLServerResult", def = function(res, ...) {
   TRUE
 }, valueClass = "logical")
 
+#' @export
 .verify.JDBC.result <- function (result, ...) {
   if (is.jnull(result)) {
     x <- .jgetEx(TRUE)
