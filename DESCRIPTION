@@ -1,14 +1,15 @@
 Package: RMSSQL
 Type: Package
-Title: R SQLServer JDBC DBI Driver
-Version: 0.0.1
-Date: 2014-09-10
-Author: Shan Huang <openhuangs@gmail.com>
-Maintainer: Shan Huang <openhuangs@gmail.com>
-Description: R SQLServer JDBC DBI Driver
+Title: R Microsoft SQL Server JDBC DBI Driver
+Version: 0.0.2
+Date: 2015-11-11
+Author: Ben Escoto <benedict.escoto@aonbenfield.com>
+Maintainer: Ben Escoto <benedict.escoto@aonbenfield.com>
+Description: R SQLServer JDBC DBI Driver.
+   Written by Shan Huang <openhuangs@gmail.com>
 License: GPL
 Imports:
     methods,
     RJDBC,
-    DBI,
-    rJava
+    DBI
+
