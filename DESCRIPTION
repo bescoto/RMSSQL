@@ -6,10 +6,10 @@ Date: 2015-11-11
 Author: Ben Escoto <benedict.escoto@aonbenfield.com>
 Maintainer: Ben Escoto <benedict.escoto@aonbenfield.com>
 Description: R SQLServer JDBC DBI Driver.
-   Written by Shan Huang <openhuangs@gmail.com>
+    Written by Shan Huang <openhuangs@gmail.com>
 License: GPL
 Imports:
     methods,
     RJDBC,
     DBI
-
+RoxygenNote: 5.0.1

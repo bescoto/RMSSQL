@@ -9,7 +9,7 @@ setClass("MSSQLServerDriver", contains = "JDBCDriver")
 #' @export
 MSSQLServer <- function(identifier.quote=NA) {
   drv <- JDBC("com.microsoft.sqlserver.jdbc.SQLServerDriver",
-              system.file("java", "sqljdbc4.jar", package="RSQLServer"))
+              system.file("java", "sqljdbc4.jar", package="RMSSQL"))
   return(as(drv, "MSSQLServerDriver"))
 }
 
