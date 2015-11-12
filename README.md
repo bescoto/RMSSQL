@@ -11,9 +11,9 @@ match your R runtime.
 
 Here is some example code:
 
-...
-con <- dbConnect(MSSQLServer(), 'uschicsdb-02', user='sa', password='')
+```
+con <- dbConnect(MSSQLServer(), 'myDBServer', user='sa', password='mypw')
 dbListTables(con)
-dbGetQuery(con, "select * from CanBeDeleted_Hail_Percentiles..test_table_small")
+dbGetQuery(con, "select * from myDBName..my_table")
 dbDisconnect(con)
-...
+```
